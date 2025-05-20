@@ -1,123 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Categories - THRIFTED</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Riff</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .categories-header {
+            height: 40vh;
+            background: linear-gradient(rgba(21, 19, 20, 0.8), rgba(21, 19, 20, 0.8)),
+                        url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+            margin-top: 80px;
+        }
+
+        .categories-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .category-section {
+            margin-bottom: 5rem;
+        }
+
+        .category-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .category-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-brand {
+            color: var(--accent-red);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-condition {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .product-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--dark);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--accent-red);
+        }
+
+        .see-all-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .see-all-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--dark);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--dark);
+        }
+
+        .see-all-btn:hover {
+            background-color: transparent;
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: auto;
+            margin: 5px 0;
+        }
+
+        .footer-logo {
+            height: 80px;
+            width: auto;
+            margin-top: 1rem;
+            display: block;
+        }
+    </style>
 </head>
-
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <img class="navbar-brand fw-bold" src="assests/riff-removebg-preview.png" height="10%" width="10%">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link active" href="categories.html">Categories</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <section class="bg-dark text-white text-center d-flex align-items-center justify-content-center"
-    style="height: 40vh; margin-top: 56px;">
-    <h1 class="display-4">Shop by Category</h1>
-  </section>
-
-  <section class="container py-5">
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm">
-          <div class="category-image sports-shoes"
-            style="height: 200px; background-size: cover; background-position: center;"></div>
-          <div class="card-body text-center">
-            <h2 class="h4">Sports Shoes</h2>
-            <p class="text-muted">Premium athletic footwear from top brands</p>
-            <a href="products.html?category=shoes" class="btn btn-danger">Shop Now</a>
-          </div>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html"><img src="logo/Riff.png" alt="RIFF" class="nav-logo"></a>
         </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm">
-          <div class="category-image hoodies"
-            style="height: 200px; background-size: cover; background-position: center;"></div>
-          <div class="card-body text-center">
-            <h2 class="h4">Hoodies</h2>
-            <p class="text-muted">Comfortable and stylish hoodies for all seasons</p>
-            <a href="products.html?category=hoodies" class="btn btn-danger">Shop Now</a>
-          </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="products.html">Products</a>
+            <a href="categories.html" class="active">Categories</a>
         </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm">
-          <div class="category-image denim" style="height: 200px; background-size: cover; background-position: center;">
-          </div>
-          <div class="card-body text-center">
-            <h2 class="h4">Denim Jackets</h2>
-            <p class="text-muted">Vintage and modern denim pieces</p>
-            <a href="products.html?category=jackets" class="btn btn-danger">Shop Now</a>
-          </div>
+        <div class="nav-icons">
+            <a href="#" class="icon-link"><i class="fas fa-search"></i></a>
+            <a href="#" class="icon-link"><i class="fas fa-shopping-cart"></i></a>
         </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm">
-          <div class="category-image shirts"
-            style="height: 200px; background-size: cover; background-position: center;"></div>
-          <div class="card-body text-center">
-            <h2 class="h4">T-Shirts</h2>
-            <p class="text-muted">Classic and trendy shirts for every occasion</p>
-            <a href="products.html?category=shirts" class="btn btn-danger">Shop Now</a>
-          </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-      </div>
-    </div>
+    </nav>
 
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="category-image casual-shirts"
-          style="height: 200px; background-size: cover; background-position: center;"></div>
-        <div class="card-body text-center">
-          <h2 class="h4">Casual Shirts</h2>
-          <p class="text-muted">Comfortable everyday casual shirts</p>
-          <a href="products.html?category=casual-shirts" class="btn btn-danger">Shop Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <main>
+        <section class="categories-header">
+            <div class="hero-content">
+                <h1>Shop by Category</h1>
+                <p class="tagline">Find Your Perfect Style</p>
+            </div>
+        </section>
 
-  <footer class="bg-dark text-white py-4 mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h3 class="h5 mb-3">Contact Us</h3>
-          <p class="mb-1">Email: info@thrifted.com</p>
-          <p>Phone: (555) 123-4567</p>
-        </div>
-        <div class="col-md-6">
-          <h3 class="h5 mb-3">Follow Us</h3>
-          <div class="d-flex gap-3">
-            <a href="#" class="text-white">Instagram</a>
-            <a href="#" class="text-white">Facebook</a>
-            <a href="#" class="text-white">Twitter</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+        <section class="categories-content">
+            <!-- Shoes Section -->
+            <div id="shoes" class="category-section">
+                <h2>Shoes</h2>
+                <p class="category-description">Discover our collection of pre-loved shoes, from sports sneakers to classic studs. Each pair is carefully inspected and cleaned to ensure the best quality.</p>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/N31247s2.jpg?im=Resize,width=750');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Nike</div>
+                            <h3 class="product-name">Mercurial Vapor 15</h3>
+                            <div class="product-details">
+                                <span>Size: US 9</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,200</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/94/2a/4c/942a4c6fd43aa3054c0d341516a46841.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Adidas</div>
+                            <h3 class="product-name">X Speedflow.1 FG</h3>
+                            <div class="product-details">
+                                <span>Size: US 10</span>
+                                <span class="product-condition">8.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,600</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/2a/95/44/2a9544346012c7823291d255994eb6f4.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Nike</div>
+                            <h3 class="product-name">Phantom GT2 Elite</h3>
+                            <div class="product-details">
+                                <span>Size: US 9.5</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,000</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/19/cc/19/19cc19b20f82f1bdfbe03ca7f2c84c61.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Puma</div>
+                            <h3 class="product-name">Ultra Ultimate FG</h3>
+                            <div class="product-details">
+                                <span>Size: US 8</span>
+                                <span class="product-condition">8/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,800</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/5c/83/77/5c837778d91e4ab296e34d15b7260852.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Nike</div>
+                            <h3 class="product-name">ZoomX Vaporfly</h3>
+                            <div class="product-details">
+                                <span>Size: US 10.5</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,500</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="see-all-container">
+                    <a href="products.html?category=shoes" class="see-all-btn">See All Shoes</a>
+                </div>
+            </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+            <!-- Hoodies Section -->
+            <div id="hoodies" class="category-section">
+                <h2>Hoodies</h2>
+                <p class="category-description">Stay cozy with our selection of pre-loved hoodies. From classic designs to trendy styles, find your perfect match.</p>
+                <div class="products-grid">
+                    <div class="product-card" data-category="hoodies">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/f1/1c/a1/f11ca1d40c0419ad5fa2b109463785b5.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Champion</div>
+                            <h3 class="product-name">Reverse Weave Hoodie</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,500</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="hoodies">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/20/91/24/209124618edc3aa0bf75e07fb633d734.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">H&M</div>
+                            <h3 class="product-name">Oversized Basic Hoodie</h3>
+                            <div class="product-details">
+                                <span>Size: XL</span>
+                                <span class="product-condition">8.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,400</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="hoodies">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/0d/08/0e/0d080e0a385cfe2d330f089331d4e0c5.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Zara</div>
+                            <h3 class="product-name">Minimalist Drawstring Hoodie</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">7.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,300</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="hoodies">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/ce/ab/8a/ceab8a27d26903017efcd146739f759f.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Carhartt</div>
+                            <h3 class="product-name">WIP Pullover Hoodie</h3>
+                            <div class="product-details">
+                                <span>Size: L</span>
+                                <span class="product-condition">8/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,350</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="hoodies">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/1b/b3/28/1bb328d94df1ea3d246a64637a4a8418.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Uniqlo</div>
+                            <h3 class="product-name">Dry Sweat Pullover Hoodie</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,200</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="see-all-container">
+                    <a href="products.html?category=hoodies" class="see-all-btn">See All Hoodies</a>
+                </div>
+            </div>
+
+            <!-- Denim Jackets Section -->
+            <div id="denim" class="category-section">
+                <h2>Denim Jackets</h2>
+                <p class="category-description">Timeless denim jackets that never go out of style. Each piece is unique and tells its own story.</p>
+                <div class="products-grid">
+                    <div class="product-card" data-category="denim">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/ea/2f/cd/ea2fcdbb6f3cabdea7d18ce92f89a169.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Levi's</div>
+                            <h3 class="product-name">Vintage Denim Jacket</h3>
+                            <div class="product-details">
+                                <span>Size: L</span>
+                                <span class="product-condition">8/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,300</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="denim">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/eb/f4/1b/ebf41b0493fc63b1599e58c579408cdc.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Zara</div>
+                            <h3 class="product-name">Oversized Blue Denim Jacket</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">8.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,400</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="denim">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/c9/9d/be/c99dbe9ac0db25d486c8fe153e015066.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">H&M</div>
+                            <h3 class="product-name">Acid Wash Denim Jacket</h3>
+                            <div class="product-details">
+                                <span>Size: L</span>
+                                <span class="product-condition">7.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,500</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="denim">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/38/7a/a4/387aa440dab144580fa7368ea47f6d93.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Pull&Bear</div>
+                            <h3 class="product-name">Cropped Denim Jacket</h3>
+                            <div class="product-details">
+                                <span>Size: S</span>
+                                <span class="product-condition">8/10</span>
+                            </div>
+                            <div class="product-price">PKR 2,300</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="denim">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/ef/75/e7/ef75e7e30c636de6c7c52cb3d06b7d0f.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Lee</div>
+                            <h3 class="product-name">Classic Fit Denim Jacket</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,900</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="see-all-container">
+                    <a href="products.html?category=denim" class="see-all-btn">See All Denim Jackets</a>
+                </div>
+            </div>
+
+            <!-- Shirts Section -->
+            <div id="shirts" class="category-section">
+                <h2>Shirts</h2>
+                <p class="category-description">From casual to formal, our collection of pre-loved shirts offers something for every occasion.</p>
+                <div class="products-grid">
+                    <div class="product-card" data-category="shirts">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/76/8c/ea/768cea0f0b775dd3d19e82f7064530d2.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Nike</div>
+                            <h3 class="product-name">Sport T-Shirt</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">8/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,500</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="shirts">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/d0/7b/5a/d07b5a35ed462eacf0f1e5e0f489172b.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Adidas</div>
+                            <h3 class="product-name">Dri-Fit Active Shirt</h3>
+                            <div class="product-details">
+                                <span>Size: L</span>
+                                <span class="product-condition">8.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,400</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="shirts">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/a5/d7/dc/a5d7dc0c763a6d920fe34d023a6c9d78.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Puma</div>
+                            <h3 class="product-name">Everyday Tee</h3>
+                            <div class="product-details">
+                                <span>Size: M</span>
+                                <span class="product-condition">9/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,600</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="shirts">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/7e/f7/fc/7ef7fc2cf78d58bd12db57e0d258b303.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Zara</div>
+                            <h3 class="product-name">Casual Cotton Shirt</h3>
+                            <div class="product-details">
+                                <span>Size: L</span>
+                                <span class="product-condition">7.5/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,300</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="shirts">
+                        <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/24/27/a9/2427a9068383825728e80ed84377a389.jpg');"></div>
+                        <div class="product-info">
+                            <div class="product-brand">Uniqlo</div>
+                            <h3 class="product-name">Slim Fit Polo</h3>
+                            <div class="product-details">
+                                <span>Size: S</span>
+                                <span class="product-condition">8/10</span>
+                            </div>
+                            <div class="product-price">PKR 1,500</div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="see-all-container">
+                    <a href="products.html?category=shirts" class="see-all-btn">See All Shirts</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>RIFF</h3>
+                <p>Pre-loved Reimagined.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="products.html">Products</a>
+                <a href="categories.html">Categories</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/riff.pakistan?igsh=MXJwMzYxcmI5MnA1bw=="><i class="fab fa-instagram"></i></a>
+                </div>
+                <img src="logo/Riff.png" alt="RIFF" class="footer-logo">
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 RIFF. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Add to cart functionality
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const productName = btn.parentElement.querySelector('.product-name').textContent;
+                alert(`${productName} added to cart!`);
+            });
+        });
+
+        // Smooth scroll to category when clicking on category links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Handle "See All" buttons
+        document.querySelectorAll('.see-all-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const category = this.getAttribute('href').split('=')[1];
+                window.location.href = `products.html?category=${category}`;
+            });
+        });
+    </script>
 </body>
-
-</html>
+</html> 
